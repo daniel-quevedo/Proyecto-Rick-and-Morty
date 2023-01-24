@@ -1,153 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+@extends('layout')
 
-    <title>Rick and Morty</title>
-</head>
-<body>
-<header>
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="{{ asset('img/logo.png') }}" alt="" width="35" height="30" class="d-inline-block align-text-top">
-        Rick and Morty
-      </a>
-      <h2>Personajes</h2>
-    </div>
-  </nav>
-</header>
-<main>
-  <div class="container">
-    <div class="info row p-3 justify-content-between">
+@section('title','Rick and Morty')
+
+@section('content')
+  <div class="info row p-3 justify-content-between">
+    @foreach ($data as $item)
       <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
+        <div class="row g-0 pt-3">
           <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
+            <img src="{{ $item['image'] }}" class="img-fluid rounded-start">
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
+              <h5 class="card-title fw-bold">{{ $item['name']}}</h5>
+              <p class="fw-bold pt-2 {{ ($item['status'] == 'Alive') ? 'text-success' : 'text-danger' }}">{{ $item['status'] }}</p>
+              <p>{{ $item['species'] }}</p>
+              <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#details{{ $item['id'] }}">Detalles</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
+      {{-- ============================= MODAL DETALLES =============================--}}
+      <div class="modal fade" id="details{{ $item['id'] }}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="detailsModalLabel">{{ $data[$item['id'] - 1]['name'] }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="id"><span class="fw-bold">Id: </span> {{ $data[$item['id'] - 1]['id'] }}</p>
+              <p><span class="fw-bold">Tipo: </span> {{ ($data[$item['id'] - 1]['type'] == '') ? 'Sin Tipo' : $data[$item['id'] - 1]['type'] }}</p>
+              <p><span class="fw-bold">Genero: </span> {{ $data[$item['id'] - 1]['gender'] }}</p>
+              <p><span class="fw-bold">Origen: </span> {{ $data[$item['id'] - 1]['origin']['name'] }}</p>
+              <p><span class="fw-bold">Url: </span> {{ ($data[$item['id'] - 1]['origin']['url'] == '') ? 'Sin Url' : $data[$item['id'] - 1]['origin']['url'] }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success">Agregar</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <button class="btn btn-secondary">Ver</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      {{-- ===========================================================================--}}
+    @endforeach
   </div>
-
-</main>
-<footer class="mt-auto">
-  <div class="container py-5 justify-content-between my-4 border-top">
-      <p class="text-center text-white fw-bold">© 2022 Daniel Quevedo</p>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
