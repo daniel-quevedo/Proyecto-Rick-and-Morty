@@ -28,9 +28,9 @@
     @yield('content')
   </div>
 </main>
-<footer class="mt-auto">
-  <div class="container py-5 justify-content-between my-4 border-top">
-    <p class="text-center text-white fw-bold">© 2022 Daniel Quevedo</p>
+<footer class="foot">
+  <div class="container py-5 justify-content-between">
+    <p>© 2022 Daniel Quevedo</p>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
