@@ -20,4 +20,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [ApiController::class, 'Index'])->name('index');
+Route::get('/misPersonajes', [ApiController::class, 'MyCharacters'])->name('myCharacters');
 Route::post('/guardarPersonajes', [ApiController::class, 'InsertAllCharacters'])->name('insertAll');
+Route::post('/MostrarPersonajes', [ApiController::class, 'ShowCharacter'])->name('showCharacter');
+Route::post('/editarPersonajes', [ApiController::class, 'EditCharacter'])->name('editCharacter');

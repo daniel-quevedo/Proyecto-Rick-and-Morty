@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('status');
-            $table->string('species');
-            $table->string('type');
-            $table->string('gender');
-            $table->string('nameOrigin');
-            $table->string('url');
+            $table->string('status')->nullable();
+            $table->string('species')->nullable();
+            $table->string('type')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('nameOrigin')->nullable();
+            $table->string('url')->nullable();
             $table->string('image');
             $table->timestamps();
         });

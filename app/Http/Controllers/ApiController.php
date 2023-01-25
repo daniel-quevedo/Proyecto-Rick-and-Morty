@@ -44,6 +44,40 @@ class ApiController extends Controller
     } catch (\Throwable $th) {
       return redirect()->route('index')->with('status','fail');
     }
-    
+  }
+
+  public function MyCharacters()
+  {
+    $myCharacters = DB::table('characters')->get();
+    //dd($myCharacters);
+
+    return view('myCharacters', compact('myCharacters'));
+  }
+
+  public function ShowCharacter(Request $request)
+  {
+    $show = DB::table('characters')
+    ->where('id',$request->id)
+    ->get();
+
+    return view('showCharacter', compact('show'));
+  }
+
+  public function EditCharacter(Request $request)
+  {
+    $edit = CharactersModel::find($request->id);
+
+    $edit->name = $request->Nombre;
+    $edit->status = $request->Estado;
+    $edit->species = $request->Especie;
+    $edit->type = $request->Tipo;
+    $edit->gender = $request->Genero;
+    $edit->nameOrigin = $request->Origen;
+    $edit->url = $request->Url;
+    $edit->image = $request->Imagen;
+
+    $edit->save();
+
+    return redirect()->route('myCharacters')->with('status','success');
   }
 }

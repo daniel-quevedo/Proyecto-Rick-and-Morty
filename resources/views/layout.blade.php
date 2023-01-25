@@ -16,6 +16,9 @@
         <img src="{{ asset('img/logo.png') }}" alt="" width="35" height="30" class="d-inline-block align-text-top">
         Rick and Morty
       </a>
+      <a href="{{ route('myCharacters') }}" class="navbar-brand">
+        Mis Personajes
+      </a>
       <h2>Personajes</h2>
     </div>
   </nav>

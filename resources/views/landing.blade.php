@@ -61,5 +61,13 @@
         'success'
       )
     </script>
+  @elseif (session('status') == 'fail')
+    <script>
+      Swal.fire(
+        'Opps!',
+        'Algo salio mal',
+        'warning'
+      )
+    </script>
   @endif
 @endsection
