@@ -3,9 +3,16 @@
 @section('title','Rick and Morty')
 
 @section('content')
-  <div class="info row p-3 justify-content-between">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <form action="{{ route('insertAll') }}" method="post">
+  @csrf
+  <input type="hidden" name="allCharacters" readonly value="{{ json_encode($data) }}">
+    <button class="btn btn-info my-2" type="submit">Agregar todos</button>
+  </form>
+</div>
+  <div class="info row px-3 justify-content-between">
     @foreach ($data as $item)
-      <div class="card mb-3" style="max-width: 540px;" >
+      <div class="card mb-3" style="max-width: 49%;" >
         <div class="row g-0 pt-3">
           <div class="col-md-4">
             <img src="{{ $item['image'] }}" class="img-fluid rounded-start">
@@ -37,7 +44,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-success">Agregar</button>
             </div>
           </div>
         </div>
@@ -45,4 +51,15 @@
       {{-- ===========================================================================--}}
     @endforeach
   </div>
+@endsection
+@section('scripts')
+  @if (session('status') == 'success')
+    <script>
+      Swal.fire(
+        'Guardado!',
+        'Los personajes han sido guardados correctamente',
+        'success'
+      )
+    </script>
+  @endif
 @endsection

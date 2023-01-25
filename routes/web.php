@@ -19,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 //     return view('landing');
 // });
 
-Route::get('/', [ApiController::class, 'Index']);
-Route::post('/character', [ApiController::class, 'Character'])->name('selectCharacter');
+Route::get('/', [ApiController::class, 'Index'])->name('index');
+Route::post('/guardarPersonajes', [ApiController::class, 'InsertAllCharacters'])->name('insertAll');
